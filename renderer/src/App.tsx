@@ -1,13 +1,10 @@
 import { Routes, Route } from 'react-router-dom'
-import { useTranslation } from 'react-i18next'
-
 import { Layout } from '@/components/layout'
 import { Home } from '@/pages/Home'
 import { Settings } from '@/pages/Settings'
 import { About } from '@/pages/About'
 
 function App() {
-  const { t } = useTranslation()
 
   return (
     <Layout>

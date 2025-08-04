@@ -12,7 +12,7 @@ const WriteFileSchema = z.object({
 })
 
 // File operations with security restrictions
-ipcMain.handle('app/read-file', async (event, filePath: string) => {
+ipcMain.handle('app/read-file', async (_, filePath: string) => {
   try {
     // Validate input
     const validatedPath = ReadFileSchema.parse(filePath)
@@ -37,7 +37,7 @@ ipcMain.handle('app/read-file', async (event, filePath: string) => {
   }
 })
 
-ipcMain.handle('app/write-file', async (event, filePath: string, content: string) => {
+ipcMain.handle('app/write-file', async (_, filePath: string, content: string) => {
   try {
     // Validate input
     const validated = WriteFileSchema.parse({ path: filePath, content })
@@ -64,7 +64,7 @@ ipcMain.handle('app/write-file', async (event, filePath: string, content: string
 })
 
 // File dialog operations
-ipcMain.handle('app/show-open-dialog', async (event, options: Electron.OpenDialogOptions) => {
+ipcMain.handle('app/show-open-dialog', async (_, options: Electron.OpenDialogOptions) => {
   try {
     const result = await dialog.showOpenDialog(options)
     return result
@@ -74,7 +74,7 @@ ipcMain.handle('app/show-open-dialog', async (event, options: Electron.OpenDialo
   }
 })
 
-ipcMain.handle('app/show-save-dialog', async (event, options: Electron.SaveDialogOptions) => {
+ipcMain.handle('app/show-save-dialog', async (_, options: Electron.SaveDialogOptions) => {
   try {
     const result = await dialog.showSaveDialog(options)
     return result

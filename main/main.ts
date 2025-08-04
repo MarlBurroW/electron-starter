@@ -1,4 +1,4 @@
-import { app, BrowserWindow, Menu, Tray, shell, ipcMain } from 'electron'
+import { app, BrowserWindow, Menu, shell } from 'electron'
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
 import log from 'electron-log'
 import { autoUpdater } from 'electron-updater'
@@ -18,7 +18,7 @@ import './ipc/system'
 
 class ElectronApp {
   private mainWindow: BrowserWindow | null = null
-  private tray: Tray | null = null
+  // private tray: Tray | null = null
 
   constructor() {
     this.init()
@@ -70,9 +70,9 @@ class ElectronApp {
 
     // Security: Prevent new window creation from renderer
     app.on('web-contents-created', (_, contents) => {
-      contents.on('new-window', (event, navigationUrl) => {
-        event.preventDefault()
-        shell.openExternal(navigationUrl)
+      contents.setWindowOpenHandler(({ url }) => {
+        shell.openExternal(url)
+        return { action: 'deny' }
       })
     })
   }

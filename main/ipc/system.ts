@@ -26,7 +26,7 @@ ipcMain.handle('app/get-system-info', async () => {
 })
 
 // Message box
-ipcMain.handle('app/show-message-box', async (event, options: {
+ipcMain.handle('app/show-message-box', async (_, options: {
   type: 'info' | 'warning' | 'error'
   title: string
   message: string
@@ -48,13 +48,13 @@ ipcMain.handle('app/show-message-box', async (event, options: {
 // Counter demonstration (for store sync)
 let counterValue = 0
 
-ipcMain.handle('app/update-counter', async (event, value: number) => {
+ipcMain.handle('app/update-counter', async (_, value: number) => {
   try {
     counterValue = value
     
     // Broadcast to all renderer processes
     const { BrowserWindow } = require('electron')
-    BrowserWindow.getAllWindows().forEach(window => {
+    BrowserWindow.getAllWindows().forEach((window: any) => {
       window.webContents.send('counter-updated', counterValue)
     })
     
@@ -70,7 +70,7 @@ ipcMain.handle('app/get-counter', async () => {
 })
 
 // Theme management
-ipcMain.handle('app/set-theme', async (event, theme: 'light' | 'dark') => {
+ipcMain.handle('app/set-theme', async (_, theme: 'light' | 'dark') => {
   try {
     // Store theme preference (you could save to file)
     const userDataPath = app.getPath('userData')
@@ -90,7 +90,7 @@ ipcMain.handle('app/set-theme', async (event, theme: 'light' | 'dark') => {
     
     // Broadcast theme change
     const { BrowserWindow } = require('electron')
-    BrowserWindow.getAllWindows().forEach(window => {
+    BrowserWindow.getAllWindows().forEach((window: any) => {
       window.webContents.send('theme-updated', theme)
     })
     
