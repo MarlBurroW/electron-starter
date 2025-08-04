@@ -1,0 +1,122 @@
+appId: com.electron.starter
+productName: "Electron Starter"
+copyright: "Copyright © 2024 ${author}"
+
+# Directories
+directories:
+  output: release
+  buildResources: build
+
+# Files to include
+files:
+  - dist/**/*
+  - node_modules/**/*
+  - "!**/node_modules/*/{CHANGELOG.md,README.md,README,readme.md,readme}"
+  - "!**/node_modules/*/{test,__tests__,tests,powered-test,example,examples}"
+  - "!**/node_modules/*.d.ts"
+  - "!**/node_modules/.bin"
+  - "!**/*.{iml,o,hprof,orig,pyc,pyo,rbc,swp,csproj,sln,xproj}"
+  - "!.editorconfig"
+  - "!**/._*"
+  - "!**/{.DS_Store,.git,.hg,.svn,CVS,RCS,SCCS,.gitignore,.gitattributes}"
+  - "!**/{__pycache__,thumbs.db,.flowconfig,.idea,.vs,.nyc_output}"
+  - "!**/{appveyor.yml,.travis.yml,circle.yml}"
+  - "!**/{npm-debug.log,yarn.lock,.yarn-integrity,.yarn-metadata.json}"
+
+# macOS configuration
+mac:
+  category: public.app-category.productivity
+  icon: build/icon.icns
+  hardenedRuntime: true
+  gatekeeperAssess: false
+  entitlements: build/entitlements.mac.plist
+  entitlementsInherit: build/entitlements.mac.plist
+  target:
+    - target: dmg
+      arch:
+        - x64
+        - arm64
+    - target: zip
+      arch:
+        - x64
+        - arm64
+
+# Windows configuration
+win:
+  icon: build/icon.ico
+  target:
+    - target: nsis
+      arch:
+        - x64
+    - target: portable
+      arch:
+        - x64
+
+# Linux configuration
+linux:
+  icon: build/icon.png
+  category: Office
+  target:
+    - target: AppImage
+      arch:
+        - x64
+    - target: deb
+      arch:
+        - x64
+
+# NSIS installer configuration (Windows)
+nsis:
+  oneClick: false
+  allowToChangeInstallationDirectory: true
+  installerIcon: build/icon.ico
+  uninstallerIcon: build/icon.ico
+  installerHeaderIcon: build/icon.ico
+  createDesktopShortcut: always
+  createStartMenuShortcut: true
+
+# DMG configuration (macOS)
+dmg:
+  title: "${productName}"
+  icon: build/icon.icns
+  background: build/background.png
+  contents:
+    - x: 410
+      y: 150
+      type: link
+      path: /Applications
+    - x: 130
+      y: 150
+      type: file
+
+# Auto-updater configuration
+publish:
+  provider: github
+  owner: your-github-username
+  repo: your-repo-name
+  private: false
+
+# Compression
+compression: maximum
+
+# Artifact name template
+artifactName: "${productName}-${version}-${os}-${arch}.${ext}"
+
+# Extra metadata
+extraMetadata:
+  main: dist/main/main.js
+  homepage: https://github.com/your-username/electron-starter
+  repository:
+    type: git
+    url: https://github.com/your-username/electron-starter.git
+
+# Platform-specific publish configurations
+# Uncomment and configure as needed
+# mac:
+#   publish:
+#     provider: github
+# win:
+#   publish:
+#     provider: github
+# linux:
+#   publish:
+#     provider: github
