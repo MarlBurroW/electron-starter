@@ -38,11 +38,11 @@ export function Layout({ children }: LayoutProps) {
     <div className="flex h-screen bg-background">
       {/* Sidebar */}
       <div className="flex flex-col w-64 bg-card border-r">
-        <div className="flex items-center justify-center h-16 border-b">
-          <h1 className="text-xl font-bold">{t('app.title')}</h1>
+        <div className="flex items-center justify-center h-16 border-b drag-region">
+          <h1 className="text-xl font-bold no-drag">{t('app.title')}</h1>
         </div>
         
-        <nav className="flex-1 px-4 py-6 space-y-2">
+        <nav className="flex-1 px-4 py-6 space-y-2 no-drag">
           {navigation.map((item) => {
             const Icon = item.icon
             const isActive = location.pathname === item.href
@@ -64,7 +64,7 @@ export function Layout({ children }: LayoutProps) {
           })}
         </nav>
 
-        <div className="p-4 border-t space-y-2">
+        <div className="p-4 border-t space-y-2 no-drag">
           <div className="flex items-center justify-between">
             <span className="text-sm font-medium">{t('nav.theme')}</span>
             <ThemeToggle />
@@ -78,6 +78,8 @@ export function Layout({ children }: LayoutProps) {
 
       {/* Main content */}
       <div className="flex-1 flex flex-col overflow-hidden">
+        {/* Top drag region for main content area */}
+        <div className="h-8 drag-region flex-shrink-0" />
         <main className="flex-1 overflow-auto p-6">
           {children}
         </main>

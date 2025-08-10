@@ -9,6 +9,7 @@ import App from './App'
 import { ThemeProvider } from '@/lib/theme-provider'
 import '@/styles/globals.css'
 import '@/lib/i18n'
+import '@/lib/electron-shim'
 
 // Create a client
 const queryClient = new QueryClient({

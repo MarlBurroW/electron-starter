@@ -5,10 +5,11 @@ import { toast } from 'sonner'
 
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import type { SystemInfo } from '@/types/global'
 
 export function About() {
   const { t } = useTranslation()
-  const [systemInfo, setSystemInfo] = useState<any>(null)
+  const [systemInfo, setSystemInfo] = useState<SystemInfo | null>(null)
   const [loading, setLoading] = useState(false)
 
   const loadSystemInfo = async () => {

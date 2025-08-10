@@ -33,6 +33,10 @@ const api = {
     nodeVersion: string
     electronVersion: string
     appVersion: string
+    osVersion: string
+    totalMemory: number
+    freeMemory: number
+    uptime: number
   }> => {
     return ipcRenderer.invoke('app/get-system-info')
   },
