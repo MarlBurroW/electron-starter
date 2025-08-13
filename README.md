@@ -1,311 +1,193 @@
-# 🚀 Electron Starter Professionnel
+# 🚀 Electron Starter
 
-Un starter template moderne et professionnel pour Electron avec React 18, TypeScript, et un ensemble complet d'outils de développement.
+Un starter moderne et professionnel pour applications Electron avec React, TypeScript, TailwindCSS et thèmes TweakCN.
+
+![Electron Starter Screenshot](https://via.placeholder.com/800x500/3B82F6/FFFFFF?text=Electron+Starter)
 
 ## ✨ Fonctionnalités
 
-### 🏗️ Architecture
-- **Electron** - Framework pour applications desktop multiplateformes
-- **React 18** - Interface utilisateur moderne avec hooks
-- **TypeScript** - Typage statique pour une meilleure DX
-- **Vite** - Build tool ultra-rapide avec HMR
-- **Architecture sécurisée** - contextIsolation, sandbox, IPC typé
+- 🎨 **Interface moderne** avec TweakCN themes et gradients adaptatifs
+- 🌙 **Mode sombre/clair** avec détection système automatique
+- 🌍 **Multilingue** (Français/Anglais) avec i18next
+- 📱 **Interface responsive** avec Tailwind CSS
+- 🔧 **TypeScript** pour un développement robuste
+- 🚀 **Hot reload** en développement
+- 📦 **Build optimisé** pour production (DMG, exe, AppImage)
+- 🧪 **Tests** avec Vitest et Playwright
+- 📋 **Linting** avec ESLint et Prettier
+- 🎯 **Barre de titre moderne** intégrée (style macOS/Spotify)
 
-### 🎨 Interface Utilisateur
-- **TailwindCSS** - Framework CSS utility-first
-- **ShadCN UI** - Composants React élégants et accessibles
-- **Dark Mode** - Support complet du thème sombre/clair
-- **Responsive Design** - Interface adaptative
+## 🛠️ Stack Technique
 
-### 🔧 Outils de Développement
-- **ESLint + Prettier** - Linting et formatage de code
-- **Husky + lint-staged** - Git hooks pour la qualité du code
-- **Commitlint** - Validation des messages de commit
-- **EditorConfig** - Configuration d'éditeur cohérente
+### Core
+- **[Electron](https://electronjs.org/)** - Framework d'applications desktop
+- **[React 18](https://reactjs.org/)** - Library UI
+- **[TypeScript](https://typescriptlang.org/)** - Typage statique
+- **[Vite](https://vitejs.dev/)** - Build tool ultra-rapide
 
-### 🧪 Tests
-- **Vitest** - Tests unitaires ultra-rapides
-- **@testing-library/react** - Tests de composants React
-- **Playwright** - Tests end-to-end
-- **Coverage** - Rapports de couverture de code
+### UI & Styling
+- **[TailwindCSS](https://tailwindcss.com/)** - Framework CSS utilitaire
+- **[TweakCN](https://tweakcn.com/)** - Générateur de thèmes pour shadcn/ui
+- **[shadcn/ui](https://ui.shadcn.com/)** - Composants UI modernes
+- **[Lucide React](https://lucide.dev/)** - Icônes
 
-### ⚡ State Management & Data
-- **Zustand** - State management simple et puissant
-- **TanStack Query** - Gestion des requêtes et cache
-- **Immer** - Mutations immutables
-- **Persist** - Persistance automatique du state
+### State & Data
+- **[Zustand](https://zustand.surge.sh/)** - State management
+- **[TanStack Query](https://tanstack.com/query)** - Gestion des données
+- **[React Router](https://reactrouter.com/)** - Routage
 
-### 🌍 Internationalisation
-- **i18next** - Système de traduction complet
-- **react-i18next** - Intégration React
-- **Français/Anglais** - Langues prêtes à l'emploi
+### Development
+- **[Vitest](https://vitest.dev/)** - Tests unitaires
+- **[Playwright](https://playwright.dev/)** - Tests E2E
+- **[ESLint](https://eslint.org/)** + **[Prettier](https://prettier.io/)** - Linting
+- **[Husky](https://typicode.github.io/husky/)** - Git hooks
 
-### 📦 Build & Déploiement
-- **electron-builder** - Packaging multiplateforme
-- **Auto-updater** - Mise à jour automatique (configuré)
-- **Code Signing** - Signature de code (macOS)
-- **Source Maps** - Debug en production
+## 🚀 Démarrage Rapide
 
-## 🛠️ Prérequis
+### Prérequis
+- Node.js 18+ 
+- npm ou yarn
 
-- **Node.js** >= 16.0.0
-- **npm** >= 8.0.0 (ou **yarn** >= 1.22.0)
-- **Git** pour les hooks de développement
-
-## 🚀 Installation
+### Installation
 
 ```bash
 # Cloner le repository
-git clone https://github.com/your-username/electron-starter.git
+git clone https://github.com/votre-username/electron-starter.git
 cd electron-starter
 
 # Installer les dépendances
 npm install
 
-# Configurer les hooks Git
-npm run prepare
+# Démarrer en mode développement
+npm run dev
 ```
 
-## 📋 Scripts de Développement
+### Scripts Disponibles
 
 ```bash
-# Développement (lance Vite + Electron avec HMR)
-npm run dev
+# Développement
+npm run dev              # Lance l'app en mode développement
+npm run dev:vite         # Lance uniquement le serveur Vite
+npm run dev:electron     # Lance uniquement Electron
 
-# Build de production
-npm run build
+# Build & Distribution
+npm run build            # Build complet (main + renderer + packaging)
+npm run build:main       # Compile le processus principal
+npm run build:renderer   # Build du renderer React
 
-# Preview du build
-npm run preview
+# Tests
+npm test                 # Tests unitaires
+npm run test:watch       # Tests en mode watch
+npm run test:e2e         # Tests end-to-end
+npm run test:e2e:ui      # Tests E2E avec interface
 
-# Tests unitaires
-npm run test
-npm run test:watch
-
-# Tests E2E
-npm run test:e2e
-npm run test:e2e:ui
-
-# Linting et formatage
-npm run lint
-npm run lint:fix
-npm run format
-
-# Vérification des types
-npm run type-check
+# Qualité de code
+npm run lint             # Linting
+npm run lint:fix         # Fix automatique des erreurs de lint
+npm run format           # Formatage avec Prettier
+npm run type-check       # Vérification TypeScript
 ```
 
-## 🏗️ Structure du Projet
+## 🎨 Thèmes
+
+Ce starter utilise **TweakCN** pour les thèmes, permettant une personnalisation facile des couleurs et du style.
+
+### Changer de thème
+
+Pour installer un nouveau thème TweakCN :
+
+```bash
+npx shadcn@latest add https://tweakcn.com/r/themes/THEME_NAME.json
+```
+
+### Thèmes populaires
+- `bold-tech.json` (actuellement installé)
+- `minimal-dark.json`
+- `vibrant-blue.json`
+
+## 📁 Structure du Projet
 
 ```
 electron-starter/
-├── main/                          # Processus principal Electron
-│   ├── main.ts                   # Point d'entrée principal
-│   ├── preload.ts                # Script de preload sécurisé
-│   ├── security.ts               # Utilitaires de sécurité
-│   └── ipc/                      # Handlers IPC
-│       ├── files.ts              # Opérations sur les fichiers
-│       └── system.ts             # Informations système
-├── renderer/                      # Processus de rendu (React)
-│   ├── index.html               # Template HTML
-│   └── src/
-│       ├── main.tsx             # Point d'entrée React
-│       ├── App.tsx              # Composant racine
-│       ├── pages/               # Pages de l'application
-│       ├── components/          # Composants React
-│       │   └── ui/              # Composants ShadCN UI
-│       ├── store/               # Stores Zustand
-│       ├── lib/                 # Utilitaires et configuration
-│       ├── styles/              # Styles CSS
-│       └── types/               # Types TypeScript
-├── tests/                         # Tests
-│   ├── unit/                    # Tests unitaires
-│   └── e2e/                     # Tests end-to-end
-├── build/                         # Ressources de build
-└── config/                        # Fichiers de configuration
+├── main/                 # Processus principal Electron
+│   ├── main.ts          # Point d'entrée principal
+│   ├── preload.ts       # Script de préchargement
+│   └── ipc/             # Handlers IPC
+├── renderer/            # Interface utilisateur (React)
+│   ├── src/
+│   │   ├── components/  # Composants React
+│   │   ├── pages/       # Pages de l'application
+│   │   ├── lib/         # Utilitaires et configuration
+│   │   ├── store/       # État global (Zustand)
+│   │   └── styles/      # Styles CSS
+│   └── index.html       # Template HTML
+├── build/               # Ressources de build (icônes, etc.)
+├── release/             # Applications compilées
+└── tests/               # Tests unitaires et E2E
 ```
-
-## 🔐 Sécurité
-
-Ce starter implémente les meilleures pratiques de sécurité Electron :
-
-### ✅ Configuration Sécurisée
-- `contextIsolation: true` - Isolation du contexte
-- `sandbox: true` - Mode sandbox activé
-- `nodeIntegration: false` - Pas d'accès Node dans le renderer
-- `webSecurity: true` - Sécurité web activée
-
-### 🛡️ IPC Sécurisé
-- Communication via `contextBridge`
-- Validation des payloads avec **Zod**
-- Whitelist des canaux IPC
-- Restriction des URLs externes
-
-### 🔒 Headers de Sécurité
-- Content Security Policy (CSP)
-- Désactivation du module remote
-- Protection contre l'ouverture de nouvelles fenêtres
-
-## 🎯 Fonctionnalités Démontrées
-
-### 🔢 Compteur avec Zustand
-- State management avec persistance
-- DevTools intégrés
-- Mutations immutables avec Immer
-
-### 📡 Requêtes avec TanStack Query
-- Cache intelligent
-- Gestion des erreurs
-- Retry automatique
-- Loading states
-
-### 💬 Communication IPC
-- Lecture/écriture de fichiers sécurisée
-- Informations système
-- Dialogs natifs
-- Validation avec Zod
-
-### ⚙️ Page de Paramètres
-- Préférences persistantes
-- Thème clair/sombre
-- Configuration utilisateur
-- Export/Import des paramètres
-
-## 📚 Technologies Utilisées
-
-| Catégorie | Technologies |
-|-----------|-------------|
-| **Core** | Electron, React 18, TypeScript |
-| **Build** | Vite, electron-builder |
-| **Styling** | TailwindCSS, PostCSS, ShadCN UI |
-| **State** | Zustand, Immer, TanStack Query |
-| **i18n** | i18next, react-i18next |
-| **Testing** | Vitest, Playwright, Testing Library |
-| **Quality** | ESLint, Prettier, Husky, Commitlint |
-| **Icons** | Lucide React |
-| **Notifications** | Sonner |
 
 ## 🔧 Configuration
 
-### Environnement
-Copiez `.env.example` vers `.env` et ajustez les variables :
+### Variables d'environnement
 
-```bash
-cp .env.example .env
+Créez un fichier `.env` à la racine :
+
+```env
+# Développement
+ELECTRON_RENDERER_URL=http://localhost:5173
+
+# Production (optionnel)
+# APP_VERSION=1.0.0
 ```
 
-### Electron Builder
-Modifiez `electron-builder.yml` pour votre application :
-- `appId` : Identifiant unique de votre app
-- `productName` : Nom affiché de l'application
-- `author` : Votre nom/organisation
-- Repository GitHub pour l'auto-updater
+### Personnalisation
 
-### Icônes
-Remplacez `build/icon.png` par votre icône (512x512px minimum).
-electron-builder générera automatiquement les formats requis.
+1. **Icônes** : Remplacez `build/icon.png` (512x512px minimum)
+2. **Métadonnées** : Modifiez `package.json` et `electron-builder.yml`
+3. **Thèmes** : Utilisez TweakCN ou modifiez `renderer/src/styles/globals.css`
 
-## 📦 Build & Distribution
+## 📦 Build et Distribution
 
-### Build Local
+### Build pour toutes les plateformes
+
 ```bash
-# Build pour l'OS courant
 npm run build
-
-# Les installeurs seront dans le dossier 'release/'
 ```
 
-### Build Multiplateforme
-```bash
-# macOS (depuis macOS uniquement)
-npm run build -- --mac
+Génère automatiquement :
+- **macOS** : `.dmg` (Intel + Apple Silicon)
+- **Windows** : `.exe` avec installateur NSIS
+- **Linux** : `.AppImage`
 
-# Windows (depuis Windows ou avec Wine)
-npm run build -- --win
+### Configuration du build
 
-# Linux
-npm run build -- --linux
-```
+La configuration se trouve dans `package.json` sous la clé `build`. Principales options :
 
-### Auto-updater
-1. Configurez GitHub releases dans `electron-builder.yml`
-2. Ajoutez votre `GH_TOKEN` aux variables d'environnement
-3. Les mises à jour seront automatiquement détectées
+- `appId` : Identifiant unique de l'application
+- `productName` : Nom affiché de l'application
+- `directories.output` : Dossier de sortie (`release/`)
 
 ## 🧪 Tests
 
-### Tests Unitaires
+### Tests unitaires (Vitest)
+
 ```bash
-# Lancer tous les tests
-npm run test
-
-# Mode watch
-npm run test:watch
-
-# Avec coverage
-npm run test -- --coverage
+npm test                 # Exécution unique
+npm run test:watch       # Mode watch
 ```
 
-### Tests E2E
+### Tests E2E (Playwright)
+
 ```bash
-# Headless
-npm run test:e2e
-
-# Avec interface graphique
-npm run test:e2e:ui
+npm run test:e2e         # Headless
+npm run test:e2e:ui      # Avec interface
 ```
-
-## 📈 Qualité du Code
-
-### Pre-commit Hooks
-- **lint-staged** : Lint et format des fichiers modifiés
-- **commitlint** : Validation des messages de commit
-
-### Standards
-- **Conventional Commits** pour les messages de commit
-- **ESLint** avec règles TypeScript et React
-- **Prettier** pour le formatage cohérent
-
-## 🚀 Déploiement
-
-### GitHub Actions (exemple)
-```yaml
-name: Build and Release
-
-on:
-  push:
-    tags:
-      - 'v*'
-
-jobs:
-  build:
-    runs-on: ${{ matrix.os }}
-    strategy:
-      matrix:
-        os: [macos-latest, windows-latest, ubuntu-latest]
-    
-    steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
-        with:
-          node-version: 18
-      
-      - run: npm ci
-      - run: npm run build
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-```
-
-### Distribution
-1. **GitHub Releases** - Recommandé pour l'auto-updater
-2. **App Stores** - Mac App Store, Microsoft Store
-3. **Direct Download** - Depuis votre site web
 
 ## 🤝 Contribution
 
 1. Fork le projet
 2. Créez une branche feature (`git checkout -b feature/amazing-feature`)
-3. Commit vos changements (`git commit -m 'feat: add amazing feature'`)
+3. Commit vos changements (`git commit -m 'Add amazing feature'`)
 4. Push vers la branche (`git push origin feature/amazing-feature`)
 5. Ouvrez une Pull Request
 
@@ -315,18 +197,17 @@ Ce projet est sous licence MIT. Voir le fichier [LICENSE](LICENSE) pour plus de 
 
 ## 🙏 Remerciements
 
-- [Electron](https://electronjs.org/) - Framework pour applications desktop
-- [React](https://reactjs.org/) - Bibliothèque UI
-- [Vite](https://vitejs.dev/) - Build tool moderne
-- [ShadCN UI](https://ui.shadcn.com/) - Composants UI magnifiques
-- [TailwindCSS](https://tailwindcss.com/) - Framework CSS utility-first
+- [Electron](https://electronjs.org/) pour le framework
+- [TweakCN](https://tweakcn.com/) pour les thèmes magnifiques
+- [shadcn/ui](https://ui.shadcn.com/) pour les composants
+- La communauté open source pour tous les outils utilisés
 
 ## 📞 Support
 
-- 📝 [Issues GitHub](https://github.com/your-username/electron-starter/issues)
-- 💬 [Discussions](https://github.com/your-username/electron-starter/discussions)
-- 📧 Email : your-email@example.com
+- 🐛 [Signaler un bug](https://github.com/votre-username/electron-starter/issues)
+- 💡 [Demander une fonctionnalité](https://github.com/votre-username/electron-starter/issues)
+- 📧 Contact : votre-email@example.com
 
 ---
 
-**Fabriqué avec ❤️ et beaucoup de ☕ par [Votre Nom](https://github.com/your-username)**
+⭐ **N'oubliez pas de donner une étoile si ce projet vous aide !**

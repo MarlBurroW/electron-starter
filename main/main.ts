@@ -86,12 +86,13 @@ class ElectronApp {
       minHeight: 600,
       show: false,
       autoHideMenuBar: true,
-      titleBarStyle: process.platform === 'darwin' ? 'hiddenInset' : 'default',
+      titleBarStyle: process.platform === 'darwin' ? 'hiddenInset' : 'hidden',
       titleBarOverlay: process.platform !== 'darwin' ? {
-        color: '#2f3349',
-        symbolColor: '#74b1be'
+        color: 'var(--background)',
+        symbolColor: 'var(--foreground)',
+        height: 40
       } : false,
-      trafficLightPosition: process.platform === 'darwin' ? { x: 20, y: 22 } : undefined,
+
       webPreferences: {
         preload: path.join(__dirname, 'preload.js'),
         sandbox: true,

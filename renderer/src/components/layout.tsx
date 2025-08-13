@@ -1,11 +1,22 @@
 import { ReactNode } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
-import { Home, Settings, Info } from 'lucide-react'
+import { 
+  Home, 
+  Settings, 
+  Info, 
+  BarChart3,
+  Users,
+  Calendar,
+  FileText,
+  Zap,
+  Palette
+} from 'lucide-react'
 
-import { ThemeToggle } from '@/components/theme-toggle'
+import { ThemeModeToggleSidebar } from '@/components/theme-mode-toggle-sidebar'
 import { LanguageToggle } from '@/components/language-toggle'
 import { Button } from '@/components/ui/button'
+import { Badge } from '@/components/ui/badge'
 import { cn } from '@/lib/utils'
 
 interface LayoutProps {
@@ -18,10 +29,38 @@ export function Layout({ children }: LayoutProps) {
 
   const navigation = [
     {
-      name: t('nav.home'),
+      name: 'Dashboard',
       href: '/',
       icon: Home,
+      badge: null,
     },
+    {
+      name: 'Analytics',
+      href: '/analytics',
+      icon: BarChart3,
+      badge: 'New',
+    },
+    {
+      name: 'Team',
+      href: '/team',
+      icon: Users,
+      badge: null,
+    },
+    {
+      name: 'Calendar',
+      href: '/calendar',
+      icon: Calendar,
+      badge: '3',
+    },
+    {
+      name: 'Documents',
+      href: '/documents',
+      icon: FileText,
+      badge: null,
+    },
+  ]
+
+  const bottomNavigation = [
     {
       name: t('nav.settings'),
       href: '/settings',
@@ -36,53 +75,116 @@ export function Layout({ children }: LayoutProps) {
 
   return (
     <div className="flex h-screen bg-background">
-      {/* Sidebar */}
-      <div className="flex flex-col w-64 bg-card border-r">
-        <div className="flex items-center justify-center h-16 border-b drag-region">
-          <h1 className="text-xl font-bold no-drag">{t('app.title')}</h1>
+      {/* Barre de titre moderne intégrée */}
+      <div className="fixed top-0 left-0 right-0 h-10 bg-background/95 backdrop-blur-sm border-b border-border/50 drag-region z-50 flex items-center justify-between px-4 select-none">
+        <div className="flex items-center space-x-2 ml-16 pointer-events-none">
+          <div className="flex h-6 w-6 items-center justify-center rounded-md bg-primary">
+            <Zap className="h-3 w-3 text-primary-foreground" />
+          </div>
+          <span className="text-sm font-medium text-foreground/80">Electron Starter</span>
         </div>
-        
-        <nav className="flex-1 px-4 py-6 space-y-2 no-drag">
+        <div className="flex items-center space-x-2 no-drag">
+          <Button variant="ghost" size="sm" className="h-6 px-2 text-xs text-muted-foreground">
+            <Palette className="mr-1 h-3 w-3" />
+            bold-tech
+          </Button>
+        </div>
+      </div>
+
+      {/* Content avec padding pour la barre de titre */}
+      <div className="flex w-full pt-10">
+        {/* Sidebar */}
+        <div className="flex flex-col w-64 bg-sidebar border-r border-sidebar-border">
+          {/* Navigation */}
+          <nav className="flex-1 px-3 py-4 space-y-1 no-drag">
+            <div className="mb-4 px-3">
+              <h2 className="text-xs font-semibold text-sidebar-foreground/70 uppercase tracking-wider">
+                Navigation
+              </h2>
+            </div>
           {navigation.map((item) => {
             const Icon = item.icon
             const isActive = location.pathname === item.href
             
             return (
               <Link key={item.name} to={item.href}>
-                <Button
-                  variant={isActive ? 'default' : 'ghost'}
+                <div
                   className={cn(
-                    'w-full justify-start',
-                    isActive && 'bg-primary text-primary-foreground'
+                    'flex items-center justify-between px-3 py-2 rounded-md text-sm font-medium transition-colors',
+                    isActive 
+                      ? 'bg-sidebar-accent text-sidebar-accent-foreground' 
+                      : 'text-sidebar-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground'
                   )}
                 >
-                  <Icon className="mr-2 h-4 w-4" />
-                  {item.name}
-                </Button>
+                  <div className="flex items-center">
+                    <Icon className="mr-3 h-4 w-4" />
+                    {item.name}
+                  </div>
+                  {item.badge && (
+                    <Badge 
+                      variant="secondary" 
+                      className="text-xs"
+                    >
+                      {item.badge}
+                    </Badge>
+                  )}
+                </div>
               </Link>
             )
           })}
-        </nav>
+          </nav>
 
-        <div className="p-4 border-t space-y-2 no-drag">
-          <div className="flex items-center justify-between">
-            <span className="text-sm font-medium">{t('nav.theme')}</span>
-            <ThemeToggle />
-          </div>
-          <div className="flex items-center justify-between">
-            <span className="text-sm font-medium">{t('nav.language')}</span>
-            <LanguageToggle />
+          {/* Bottom Navigation */}
+          <div className="px-3 py-4 border-t border-sidebar-border space-y-1 no-drag">
+          {bottomNavigation.map((item) => {
+            const Icon = item.icon
+            const isActive = location.pathname === item.href
+            
+            return (
+              <Link key={item.name} to={item.href}>
+                <div
+                  className={cn(
+                    'flex items-center px-3 py-2 rounded-md text-sm font-medium transition-colors',
+                    isActive 
+                      ? 'bg-sidebar-accent text-sidebar-accent-foreground' 
+                      : 'text-sidebar-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground'
+                  )}
+                >
+                  <Icon className="mr-3 h-4 w-4" />
+                  {item.name}
+                </div>
+              </Link>
+            )
+          })}
+          
+          {/* Theme and Language Controls */}
+          <div className="mt-4 pt-4 border-t border-sidebar-border space-y-3">
+            <div className="flex items-center justify-between px-3">
+              <span className="text-xs font-medium text-sidebar-foreground/70 uppercase tracking-wider">
+                Preferences
+              </span>
+            </div>
+            <div className="px-3 space-y-2">
+                                        <div className="flex items-center justify-between">
+                            <span className="text-sm text-sidebar-foreground">Theme</span>
+                            <ThemeModeToggleSidebar />
+                          </div>
+              <div className="flex items-center justify-between">
+                <span className="text-sm text-sidebar-foreground">Language</span>
+                <LanguageToggle />
+              </div>
+            </div>
           </div>
         </div>
-      </div>
+        </div>
 
-      {/* Main content */}
-      <div className="flex-1 flex flex-col overflow-hidden">
-        {/* Top drag region for main content area */}
-        <div className="h-8 drag-region flex-shrink-0" />
-        <main className="flex-1 overflow-auto p-6">
-          {children}
-        </main>
+        {/* Main content */}
+        <div className="flex-1 flex flex-col overflow-hidden">
+          {/* Main content area */}
+          <main className="flex-1 overflow-auto p-6">
+            {children}
+          </main>
+        </div>
       </div>
     </div>
   )

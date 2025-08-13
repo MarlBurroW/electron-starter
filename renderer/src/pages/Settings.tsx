@@ -8,11 +8,11 @@ import { Label } from '@/components/ui/label'
 import { Switch } from '@/components/ui/switch'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { useSettingsStore } from '@/store/settings'
-import { useTheme } from '@/lib/theme-provider'
+
+import { ThemeModeToggle } from '@/components/theme-mode-toggle'
 
 export function Settings() {
   const { t } = useTranslation()
-  const { theme, setTheme } = useTheme()
   
   const { 
     notifications, 
@@ -132,6 +132,7 @@ export function Settings() {
         </TabsContent>
 
         <TabsContent value="appearance" className="space-y-4">
+          {/* Sélecteur de mode (Clair/Sombre/Système) */}
           <Card>
             <CardHeader>
               <CardTitle>{t('pages.settings.appearance.theme')}</CardTitle>
@@ -139,38 +140,12 @@ export function Settings() {
                 {t('pages.settings.appearance.themeDescription')}
               </CardDescription>
             </CardHeader>
-            <CardContent className="space-y-4">
-              <div className="grid grid-cols-3 gap-4">
-                <div className="space-y-2">
-                  <Button
-                    variant={theme === 'light' ? 'default' : 'outline'}
-                    className="w-full"
-                    onClick={() => setTheme('light')}
-                  >
-                    {t('theme.light')}
-                  </Button>
-                </div>
-                <div className="space-y-2">
-                  <Button
-                    variant={theme === 'dark' ? 'default' : 'outline'}
-                    className="w-full"
-                    onClick={() => setTheme('dark')}
-                  >
-                    {t('theme.dark')}
-                  </Button>
-                </div>
-                <div className="space-y-2">
-                  <Button
-                    variant={theme === 'system' ? 'default' : 'outline'}
-                    className="w-full"
-                    onClick={() => setTheme('system')}
-                  >
-                    {t('theme.system')}
-                  </Button>
-                </div>
-              </div>
+            <CardContent>
+              <ThemeModeToggle />
             </CardContent>
           </Card>
+
+
         </TabsContent>
 
         <TabsContent value="advanced" className="space-y-4">

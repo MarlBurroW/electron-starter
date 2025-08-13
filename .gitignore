@@ -123,3 +123,19 @@ playwright/.cache/
 # Electron
 app/
 packages/
+
+# Build artifacts
+*.dmg
+*.exe
+*.AppImage
+*.deb
+*.rpm
+*.snap
+
+# Electron-builder
+release/
+!release/.gitkeep
+
+# TweakCN extracted files (temporary)
+extract-tweakcn-*.js
+COMPONENTS-UPGRADE-SUMMARY.md

@@ -7,7 +7,7 @@ interface SettingsState {
   notifications: boolean
   autoSave: boolean
   language: 'en' | 'fr'
-  theme: 'light' | 'dark' | 'system'
+  currentThemeMode: 'light' | 'dark' | 'system' // Mode du thème actuel
   
   // User profile
   username: string
@@ -24,7 +24,7 @@ interface SettingsState {
   updateNotifications: (enabled: boolean) => void
   updateAutoSave: (enabled: boolean) => void
   updateLanguage: (language: 'en' | 'fr') => void
-  updateTheme: (theme: 'light' | 'dark' | 'system') => void
+  updateCurrentThemeMode: (mode: 'light' | 'dark' | 'system') => void
   updateUsername: (username: string) => void
   updateEmail: (email: string) => void
   updateWindowSize: (width: number, height: number) => void
@@ -36,7 +36,7 @@ const defaultSettings = {
   notifications: true,
   autoSave: true,
   language: 'en' as const,
-  theme: 'system' as const,
+  currentThemeMode: 'system' as const,
   username: '',
   email: '',
   windowSize: {
@@ -67,9 +67,9 @@ export const useSettingsStore = create<SettingsState>()(
             state.language = language
           }),
           
-        updateTheme: (theme: 'light' | 'dark' | 'system') =>
+        updateCurrentThemeMode: (mode: 'light' | 'dark' | 'system') =>
           set((state) => {
-            state.theme = theme
+            state.currentThemeMode = mode
           }),
           
         updateUsername: (username: string) =>
@@ -112,6 +112,6 @@ export const useSettingsStore = create<SettingsState>()(
 export const useNotifications = () => useSettingsStore((state) => state.notifications)
 export const useAutoSave = () => useSettingsStore((state) => state.autoSave)
 export const useAppLanguage = () => useSettingsStore((state) => state.language)
-export const useAppTheme = () => useSettingsStore((state) => state.theme)
+export const useCurrentThemeMode = () => useSettingsStore((state) => state.currentThemeMode)
 export const useWindowSize = () => useSettingsStore((state) => state.windowSize)
 export const useSidebarState = () => useSettingsStore((state) => state.sidebarCollapsed)

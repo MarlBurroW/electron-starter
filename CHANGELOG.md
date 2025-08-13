@@ -1,44 +1,49 @@
 # Changelog
 
-Tous les changements notables de ce projet seront documentés dans ce fichier.
+All notable changes to this project will be documented in this file.
 
-Le format est basé sur [Keep a Changelog](https://keepachangelog.com/fr/1.0.0/),
-et ce projet adhère à [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
-
-## [Non publié]
-
-### Ajouté
-- Structure de projet initiale avec Electron + React + TypeScript
-- Configuration Vite avec support HMR pour le développement
-- Interface utilisateur avec TailwindCSS et ShadCN UI
-- State management avec Zustand (persist + devtools + immer)
-- Gestion des requêtes avec TanStack Query
-- Internationalisation avec i18next (FR/EN)
-- Tests unitaires avec Vitest et Testing Library
-- Tests E2E avec Playwright
-- Configuration ESLint + Prettier + Husky + lint-staged
-- Support du dark mode avec toggle UI
-- IPC sécurisé avec validation Zod
-- Configuration electron-builder pour packaging multiplateforme
-- Auto-updater configuré (prêt pour production)
-- Logging avec electron-log
-- Sécurité renforcée (contextIsolation, sandbox)
-- Pages d'exemple : Home, Settings, About
-- Composants UI : Counter, Query demo, IPC demo
-- Documentation complète avec README détaillé
-
-### Sécurité
-- Configuration sécurisée d'Electron (contextIsolation, sandbox)
-- IPC typé avec validation des payloads
-- Whitelist des URLs externes
-- CSP (Content Security Policy) configuré
-- Désactivation du module remote
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
+and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [1.0.0] - 2024-01-XX
 
-### Ajouté
-- Version initiale du starter professionnel Electron
-- Architecture complète avec main/preload/renderer
-- Stack technologique moderne et outils de développement
-- Tests et CI/CD prêts pour la production
-- Documentation et exemples d'utilisation
+### Added
+- 🎨 **Modern UI** with TweakCN themes and adaptive gradients
+- 🌙 **Dark/Light mode** with system detection
+- 🌍 **Internationalization** (French/English) with i18next
+- 📱 **Responsive design** with Tailwind CSS
+- 🚀 **Modern title bar** integrated (macOS/Spotify style)
+- 📦 **Complete build system** for all platforms (DMG, exe, AppImage)
+- 🧪 **Testing setup** with Vitest and Playwright
+- 📋 **Code quality** with ESLint, Prettier, and Husky
+- 🔧 **TypeScript** for robust development
+- 🎯 **Professional dashboard** with mock data and modern cards
+- 🎨 **Theme selector** in sidebar and settings
+- 🌐 **Language toggle** functionality
+- 📱 **Native window controls** integration
+- 🖱️ **Proper drag & drop** behavior for title bar
+- 🚫 **Text selection disabled** for native app feel
+
+### Technical
+- **Electron 27** with security best practices
+- **React 18** with modern hooks
+- **Vite** for ultra-fast development
+- **Zustand** for state management
+- **TanStack Query** for data fetching
+- **React Router** with hash routing for production
+- **shadcn/ui** components with TweakCN theming
+- **Lucide React** icons
+- **Auto-updater** ready configuration
+
+### Fixed
+- ✅ Production routing with HashRouter
+- ✅ Missing dependencies in build (electron-toolkit/utils, electron-log, etc.)
+- ✅ Native macOS window behavior
+- ✅ Title bar dragging functionality
+- ✅ Text selection in UI elements
+
+### Security
+- 🔒 Context isolation enabled
+- 🔒 Node integration disabled in renderer
+- 🔒 Sandbox mode enabled
+- 🔒 Secure preload script configuration

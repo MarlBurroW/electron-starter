@@ -95,6 +95,9 @@ const resources = {
         light: 'Light',
         dark: 'Dark',
         system: 'System',
+        selector: 'Theme',
+        selectTitle: 'Choose a theme',
+        selectDescription: 'Select the color theme for your application. You can preview both light and dark modes.',
       },
       
       // Common
@@ -202,6 +205,9 @@ const resources = {
         light: 'Clair',
         dark: 'Sombre',
         system: 'Système',
+        selector: 'Thème',
+        selectTitle: 'Choisir un thème',
+        selectDescription: 'Sélectionnez le thème de couleur pour votre application. Vous pouvez prévisualiser les modes clair et sombre.',
       },
       
       // Common
