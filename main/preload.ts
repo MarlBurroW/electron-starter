@@ -91,6 +91,16 @@ const api = {
     return () => ipcRenderer.removeAllListeners('theme-updated')
   },
 
+  // API logging
+  onApiLog: (callback: (log: {
+    type: 'request' | 'response' | 'error'
+    data: any
+    timestamp: string
+  }) => void) => {
+    ipcRenderer.on('api-log', (_, log) => callback(log))
+    return () => ipcRenderer.removeAllListeners('api-log')
+  },
+
   // API calls via main process (secure)
   api: {
     get: async <T>(url: string, headers?: Record<string, string>): Promise<{

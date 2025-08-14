@@ -30,6 +30,11 @@ export interface ElectronAPI {
   updateCounter: (value: number) => Promise<void>
   onCounterUpdate: (callback: (value: number) => void) => () => void
   onThemeUpdate: (callback: (theme: 'light' | 'dark') => void) => () => void
+  onApiLog: (callback: (log: {
+    type: 'request' | 'response' | 'error'
+    data: any
+    timestamp: string
+  }) => void) => () => void
   api: {
     get: <T>(url: string, headers?: Record<string, string>) => Promise<ApiResponse<T>>
     post: <T>(url: string, body?: any, headers?: Record<string, string>) => Promise<ApiResponse<T>>

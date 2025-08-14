@@ -60,15 +60,42 @@ function isUrlAllowed(url: string): boolean {
 
 // Service API principal
 class ApiService {
+  private broadcastToRenderer(type: 'request' | 'response' | 'error', data: any) {
+    try {
+      const { BrowserWindow } = require('electron')
+      BrowserWindow.getAllWindows().forEach((window: any) => {
+        window.webContents.send('api-log', { type, data, timestamp: new Date().toISOString() })
+      })
+    } catch (error) {
+      // Ignore si pas de fenêtre disponible
+    }
+  }
+
   async makeRequest<T>(request: ApiRequest): Promise<ApiResponse<T>> {
     const { url, method, headers = {}, body, timeout = DEFAULT_TIMEOUT } = request
     
     // Validation de sécurité
     if (!isUrlAllowed(url)) {
-      throw new Error(`Domain not allowed: ${new URL(url).hostname}`)
+      const error = new Error(`Domain not allowed: ${new URL(url).hostname}`)
+      this.broadcastToRenderer('error', {
+        url,
+        method,
+        error: error.message
+      })
+      throw error
+    }
+    
+    // Log de la requête
+    const requestLog = {
+      method,
+      url,
+      headers: { ...DEFAULT_HEADERS, ...headers },
+      body: body ? JSON.stringify(body) : null,
+      timestamp: new Date().toISOString()
     }
     
     log.info(`API Request: ${method} ${url}`)
+    this.broadcastToRenderer('request', requestLog)
     
     try {
       // Utiliser fetch avec AbortController pour le timeout
@@ -108,7 +135,19 @@ class ApiService {
       }
       
       if (!response.ok) {
+        const errorLog = {
+          method,
+          url,
+          status: response.status,
+          statusText: response.statusText,
+          data,
+          headers: responseHeaders,
+          timestamp: new Date().toISOString()
+        }
+        
         log.error(`API Error: ${response.status} ${response.statusText}`, { url, data })
+        this.broadcastToRenderer('error', errorLog)
+        
         throw {
           message: `HTTP ${response.status}: ${response.statusText}`,
           status: response.status,
@@ -117,37 +156,59 @@ class ApiService {
         } as ApiError
       }
       
+      // Log de la réponse réussie
+      const responseLog = {
+        method,
+        url,
+        status: response.status,
+        statusText: response.statusText,
+        dataSize: JSON.stringify(data).length,
+        headers: responseHeaders,
+        timestamp: new Date().toISOString()
+      }
+      
       log.info(`API Success: ${method} ${url} - ${response.status}`)
+      this.broadcastToRenderer('response', responseLog)
+      
       return apiResponse
       
     } catch (error: any) {
-      log.error(`API Request failed: ${method} ${url}`, error)
+      let apiError: ApiError
       
       // Gestion spécifique des erreurs
       if (error.name === 'AbortError') {
-        throw {
+        apiError = {
           message: 'Request timeout',
           code: 'TIMEOUT',
-        } as ApiError
-      }
-      
-      if (error.code === 'ENOTFOUND' || error.code === 'ECONNREFUSED') {
-        throw {
+        }
+      } else if (error.code === 'ENOTFOUND' || error.code === 'ECONNREFUSED') {
+        apiError = {
           message: 'Network error - please check your internet connection',
           code: 'NETWORK_ERROR',
-        } as ApiError
+        }
+      } else if (error.status && error.message) {
+        // Si c'est déjà une ApiError, la propager
+        apiError = error
+      } else {
+        // Erreur générique
+        apiError = {
+          message: error.message || 'Unknown error occurred',
+          code: 'UNKNOWN_ERROR',
+        }
       }
       
-      // Si c'est déjà une ApiError, la propager
-      if (error.status && error.message) {
-        throw error
+      // Log de l'erreur
+      const errorLog = {
+        method,
+        url,
+        error: apiError,
+        timestamp: new Date().toISOString()
       }
       
-      // Erreur générique
-      throw {
-        message: error.message || 'Unknown error occurred',
-        code: 'UNKNOWN_ERROR',
-      } as ApiError
+      log.error(`API Request failed: ${method} ${url}`, error)
+      this.broadcastToRenderer('error', errorLog)
+      
+      throw apiError
     }
   }
   

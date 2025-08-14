@@ -5,8 +5,11 @@ import DesignSystem from '@/pages/DesignSystem'
 import ApiDemo from '@/pages/ApiDemo'
 import { Settings } from '@/pages/Settings'
 import { About } from '@/pages/About'
+import { useApiLogger } from '@/lib/api-logger'
 
 function App() {
+  // Activer le logging des API calls dans la console
+  useApiLogger()
 
   return (
     <Layout>
