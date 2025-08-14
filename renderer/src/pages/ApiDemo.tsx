@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import { 
@@ -50,14 +50,15 @@ interface Todo {
   completed: boolean
 }
 
-// Services API - Meilleures pratiques avec gestion d'erreurs
+// Services API - Via main process pour éviter CORS et CSP
 const API_BASE_URL = 'https://jsonplaceholder.typicode.com'
 
 class ApiError extends Error {
   constructor(
     message: string,
-    public status: number,
-    public statusText: string
+    public status?: number,
+    public statusText?: string,
+    public code?: string
   ) {
     super(message)
     this.name = 'ApiError'
@@ -66,37 +67,31 @@ class ApiError extends Error {
 
 const apiClient = {
   async get<T>(endpoint: string): Promise<T> {
-    const response = await fetch(`${API_BASE_URL}${endpoint}`)
-    
-    if (!response.ok) {
+    try {
+      const response = await window.api.api.get<T>(`${API_BASE_URL}${endpoint}`)
+      return response.data
+    } catch (error: any) {
       throw new ApiError(
-        `API Error: ${response.status} ${response.statusText}`,
-        response.status,
-        response.statusText
+        error.message || 'API request failed',
+        error.status,
+        error.statusText,
+        error.code
       )
     }
-    
-    return response.json()
   },
   
   async post<T>(endpoint: string, data: any): Promise<T> {
-    const response = await fetch(`${API_BASE_URL}${endpoint}`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(data),
-    })
-    
-    if (!response.ok) {
+    try {
+      const response = await window.api.api.post<T>(`${API_BASE_URL}${endpoint}`, data)
+      return response.data
+    } catch (error: any) {
       throw new ApiError(
-        `API Error: ${response.status} ${response.statusText}`,
-        response.status,
-        response.statusText
+        error.message || 'API request failed',
+        error.status,
+        error.statusText,
+        error.code
       )
     }
-    
-    return response.json()
   }
 }
 
@@ -198,7 +193,7 @@ function UsersSection() {
           </Button>
         </CardTitle>
         <CardDescription>
-          {users?.length || 0} utilisateurs chargés depuis JSONPlaceholder API
+          {users?.length || 0} {t('pages.apiDemo.messages.usersLoaded')}
         </CardDescription>
       </CardHeader>
       <CardContent>
@@ -314,11 +309,11 @@ function PostsSection() {
             ) : (
               <FileText className="h-4 w-4 mr-2" />
             )}
-            Créer un post
+            {t('pages.apiDemo.messages.createPost')}
           </Button>
         </CardTitle>
         <CardDescription>
-          {posts?.length || 0} articles récents
+          {posts?.length || 0} {t('pages.apiDemo.messages.recentPosts')}
         </CardDescription>
       </CardHeader>
       <CardContent>
@@ -337,7 +332,7 @@ function PostsSection() {
         {createPostMutation.isSuccess && (
           <div className="mt-4 p-3 bg-green-50 dark:bg-green-950 border border-green-200 dark:border-green-800 rounded-lg">
             <p className="text-sm text-green-700 dark:text-green-300">
-              ✅ Post créé avec succès ! (ID: {createPostMutation.data?.id})
+              ✅ {t('pages.apiDemo.messages.postCreated')} (ID: {createPostMutation.data?.id})
             </p>
           </div>
         )}
@@ -415,7 +410,7 @@ function TodosSection() {
           {t('pages.apiDemo.sections.todos')}
         </CardTitle>
         <CardDescription>
-          {completedTodos}/{totalTodos} tâches terminées
+          {completedTodos}/{totalTodos} {t('pages.apiDemo.messages.tasksCompleted')}
         </CardDescription>
       </CardHeader>
       <CardContent>
@@ -460,7 +455,7 @@ export default function ApiDemo() {
         <div className="flex items-center gap-2 p-3 bg-blue-50 dark:bg-blue-950 border border-blue-200 dark:border-blue-800 rounded-lg">
           <ExternalLink className="h-4 w-4 text-blue-600 dark:text-blue-400" />
           <p className="text-sm">
-            <strong>API utilisée :</strong>{' '}
+            <strong>{t('pages.apiDemo.messages.apiUsed')}</strong>{' '}
             <a 
               href="https://jsonplaceholder.typicode.com" 
               target="_blank" 
@@ -469,7 +464,7 @@ export default function ApiDemo() {
             >
               JSONPlaceholder
             </a>{' '}
-            - API REST gratuite pour tests et prototypage
+            - {t('pages.apiDemo.messages.freeApiDescription')}
           </p>
         </div>
       </div>
@@ -482,30 +477,30 @@ export default function ApiDemo() {
 
       <Card>
         <CardHeader>
-          <CardTitle>🏗️ Architecture et bonnes pratiques</CardTitle>
+          <CardTitle>🏗️ {t('pages.apiDemo.architecture.title')}</CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-              <h4 className="font-medium mb-2">✅ Implémenté</h4>
+              <h4 className="font-medium mb-2">✅ {t('pages.apiDemo.architecture.implemented')}</h4>
               <ul className="text-sm space-y-1 text-muted-foreground">
-                <li>• TanStack Query pour la gestion des données</li>
-                <li>• Gestion d'erreurs avec types personnalisés</li>
-                <li>• États de chargement et retry automatique</li>
-                <li>• Cache et invalidation intelligente</li>
-                <li>• Mutations optimistes</li>
-                <li>• API client centralisé</li>
+                <li>• {t('pages.apiDemo.architecture.features.tanstackQuery')}</li>
+                <li>• {t('pages.apiDemo.architecture.features.errorHandling')}</li>
+                <li>• {t('pages.apiDemo.architecture.features.loadingStates')}</li>
+                <li>• {t('pages.apiDemo.architecture.features.cacheInvalidation')}</li>
+                <li>• {t('pages.apiDemo.architecture.features.optimisticMutations')}</li>
+                <li>• {t('pages.apiDemo.architecture.features.centralizedClient')}</li>
               </ul>
             </div>
             <div>
-              <h4 className="font-medium mb-2">🎯 Recommandations</h4>
+              <h4 className="font-medium mb-2">🎯 {t('pages.apiDemo.architecture.recommendations')}</h4>
               <ul className="text-sm space-y-1 text-muted-foreground">
-                <li>• Appels API depuis le renderer (sécurisé pour APIs publiques)</li>
-                <li>• Utiliser le main process pour APIs sensibles</li>
-                <li>• Validation des données avec Zod</li>
-                <li>• Rate limiting côté client</li>
-                <li>• Logging des erreurs API</li>
-                <li>• Tests unitaires des services</li>
+                <li>• {t('pages.apiDemo.architecture.features.mainProcessCalls')}</li>
+                <li>• {t('pages.apiDemo.architecture.features.rendererProcess')}</li>
+                <li>• {t('pages.apiDemo.architecture.features.dataValidation')}</li>
+                <li>• {t('pages.apiDemo.architecture.features.rateLimiting')}</li>
+                <li>• {t('pages.apiDemo.architecture.features.errorLogging')}</li>
+                <li>• {t('pages.apiDemo.architecture.features.unitTesting')}</li>
               </ul>
             </div>
           </div>

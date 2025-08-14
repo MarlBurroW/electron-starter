@@ -44,7 +44,7 @@ const api = {
   openExternal: async (url: string): Promise<void> => {
     const validated = OpenExternalSchema.parse({ url })
     // Security: Only allow HTTPS URLs and specific domains
-    const allowedDomains = ['github.com', 'electron.build', 'vitejs.dev']
+    const allowedDomains = ['github.com', 'electron.build', 'vitejs.dev', 'tweakcn.com']
     const urlObj = new URL(validated.url)
     
     if (urlObj.protocol !== 'https:' || !allowedDomains.includes(urlObj.hostname)) {
@@ -78,6 +78,69 @@ const api = {
   onThemeUpdate: (callback: (theme: 'light' | 'dark') => void) => {
     ipcRenderer.on('theme-updated', (_, theme) => callback(theme))
     return () => ipcRenderer.removeAllListeners('theme-updated')
+  },
+
+  // API calls via main process (secure)
+  api: {
+    get: async <T>(url: string, headers?: Record<string, string>): Promise<{
+      data: T
+      status: number
+      statusText: string
+      headers: Record<string, string>
+    }> => {
+      return ipcRenderer.invoke('api/get', url, headers)
+    },
+
+    post: async <T>(url: string, body?: any, headers?: Record<string, string>): Promise<{
+      data: T
+      status: number
+      statusText: string
+      headers: Record<string, string>
+    }> => {
+      return ipcRenderer.invoke('api/post', url, body, headers)
+    },
+
+    put: async <T>(url: string, body?: any, headers?: Record<string, string>): Promise<{
+      data: T
+      status: number
+      statusText: string
+      headers: Record<string, string>
+    }> => {
+      return ipcRenderer.invoke('api/put', url, body, headers)
+    },
+
+    patch: async <T>(url: string, body?: any, headers?: Record<string, string>): Promise<{
+      data: T
+      status: number
+      statusText: string
+      headers: Record<string, string>
+    }> => {
+      return ipcRenderer.invoke('api/patch', url, body, headers)
+    },
+
+    delete: async <T>(url: string, headers?: Record<string, string>): Promise<{
+      data: T
+      status: number
+      statusText: string
+      headers: Record<string, string>
+    }> => {
+      return ipcRenderer.invoke('api/delete', url, headers)
+    },
+
+    request: async <T>(request: {
+      url: string
+      method: 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH'
+      headers?: Record<string, string>
+      body?: any
+      timeout?: number
+    }): Promise<{
+      data: T
+      status: number
+      statusText: string
+      headers: Record<string, string>
+    }> => {
+      return ipcRenderer.invoke('api/request', request)
+    }
   }
 }
 

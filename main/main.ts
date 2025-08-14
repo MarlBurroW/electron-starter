@@ -15,6 +15,7 @@ autoUpdater.logger = log
 // Import IPC handlers
 import './ipc/files'
 import './ipc/system'
+import './ipc/api'
 
 class ElectronApp {
   private mainWindow: BrowserWindow | null = null
