@@ -2,6 +2,12 @@
 
 A modern, production-ready Electron starter template with React, TypeScript, TailwindCSS, and beautiful TweakCN themes. Built with security, performance, and developer experience in mind.
 
+<img width="2624" height="1824" alt="CleanShot 2025-08-14 at 18 20 38@2x" src="https://github.com/user-attachments/assets/e71a0f31-3f01-4cff-ac02-fd957cbc2379" />
+
+<img width="2628" height="2048" alt="CleanShot 2025-08-14 at 16 46 36@2x" src="https://github.com/user-attachments/assets/263bb3fa-a7e5-45bf-bf04-42f009dda520" />
+
+
+
 ![Electron Starter](https://img.shields.io/badge/Electron-27+-blue.svg)
 ![React](https://img.shields.io/badge/React-18+-61dafb.svg)
 ![TypeScript](https://img.shields.io/badge/TypeScript-5+-blue.svg)
