@@ -1,25 +1,31 @@
 import { contextBridge, ipcRenderer, shell } from 'electron'
-import { z } from 'zod'
 
-// Validation schemas for IPC communication
-const ReadFileSchema = z.object({
-  path: z.string().min(1),
-})
+// Simple validation functions to replace Zod
+const validatePath = (path: string): boolean => {
+  return typeof path === 'string' && path.length > 0
+}
 
-const OpenExternalSchema = z.object({
-  url: z.string().url(),
-})
+const validateUrl = (url: string): boolean => {
+  try {
+    new URL(url)
+    return true
+  } catch {
+    return false
+  }
+}
 
-const CounterUpdateSchema = z.object({
-  value: z.number(),
-})
+const validateNumber = (value: number): boolean => {
+  return typeof value === 'number' && !isNaN(value)
+}
 
 // Type-safe IPC API
 const api = {
   // File operations
   readFile: async (path: string): Promise<string> => {
-    const validated = ReadFileSchema.parse({ path })
-    return ipcRenderer.invoke('app/read-file', validated.path)
+    if (!validatePath(path)) {
+      throw new Error('Invalid path provided')
+    }
+    return ipcRenderer.invoke('app/read-file', path)
   },
 
   writeFile: async (path: string, content: string): Promise<void> => {
@@ -42,16 +48,19 @@ const api = {
   },
 
   openExternal: async (url: string): Promise<void> => {
-    const validated = OpenExternalSchema.parse({ url })
+    if (!validateUrl(url)) {
+      throw new Error('Invalid URL provided')
+    }
+    
     // Security: Only allow HTTPS URLs and specific domains
     const allowedDomains = ['github.com', 'electron.build', 'vitejs.dev', 'tweakcn.com']
-    const urlObj = new URL(validated.url)
+    const urlObj = new URL(url)
     
     if (urlObj.protocol !== 'https:' || !allowedDomains.includes(urlObj.hostname)) {
       throw new Error('URL not allowed')
     }
     
-    return shell.openExternal(validated.url)
+    return shell.openExternal(url)
   },
 
   // App operations
@@ -65,8 +74,10 @@ const api = {
 
   // Counter example (for demonstration)
   updateCounter: async (value: number): Promise<void> => {
-    const validated = CounterUpdateSchema.parse({ value })
-    return ipcRenderer.invoke('app/update-counter', validated.value)
+    if (!validateNumber(value)) {
+      throw new Error('Invalid number provided')
+    }
+    return ipcRenderer.invoke('app/update-counter', value)
   },
 
   // Event listeners

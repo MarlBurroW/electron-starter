@@ -60,7 +60,7 @@ function isUrlAllowed(url: string): boolean {
 
 // Service API principal
 class ApiService {
-  private async makeRequest<T>(request: ApiRequest): Promise<ApiResponse<T>> {
+  async makeRequest<T>(request: ApiRequest): Promise<ApiResponse<T>> {
     const { url, method, headers = {}, body, timeout = DEFAULT_TIMEOUT } = request
     
     // Validation de sécurité
@@ -95,7 +95,7 @@ class ApiService {
       const contentType = response.headers.get('content-type') || ''
       
       if (contentType.includes('application/json')) {
-        data = await response.json()
+        data = await response.json() as T
       } else {
         data = (await response.text()) as unknown as T
       }
@@ -226,4 +226,5 @@ ipcMain.handle('api/delete', async (_, url: string, headers?: Record<string, str
   }
 })
 
-export { ApiService, ApiRequest, ApiResponse, ApiError }
+export { ApiService }
+export type { ApiRequest, ApiResponse, ApiError }
