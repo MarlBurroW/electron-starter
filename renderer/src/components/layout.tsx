@@ -82,7 +82,7 @@ export function Layout({ children }: LayoutProps) {
   return (
     <div className="flex h-screen bg-background">
       {/* Barre de titre moderne intégrée */}
-      <div className="fixed top-0 left-0 right-0 h-10 bg-background/95 backdrop-blur-sm border-b border-border/50 drag-region z-50 flex items-center justify-between px-4 select-none">
+      <div className="fixed top-0 left-0 right-0 h-10 bg-background/95 backdrop-blur-xs border-b border-border/50 drag-region z-50 flex items-center justify-between px-4 select-none">
         <div className="flex items-center space-x-2 ml-16 pointer-events-none">
           <div className="flex h-6 w-6 items-center justify-center rounded-md bg-primary">
             <Zap className="h-3 w-3 text-primary-foreground" />

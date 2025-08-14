@@ -19,7 +19,7 @@ export function ThemeModeToggle() {
       {modes.map(({ value, icon: Icon, label }) => (
         <Button
           key={value}
-          variant={currentThemeMode === value ? 'default' : 'outline'}
+          variant={currentThemeMode === value ? 'default' : 'outline-solid'}
           size="sm"
           onClick={() => setThemeMode(value)}
           className="flex items-center gap-2"

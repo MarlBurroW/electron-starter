@@ -161,7 +161,7 @@ export default function DesignSystem() {
             </CardContent>
           </Card>
 
-          <Card className="bg-gradient-to-br from-primary/5 via-primary/10 to-primary/5">
+          <Card className="bg-linear-to-br from-primary/5 via-primary/10 to-primary/5">
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <Heart className="h-5 w-5 text-primary" />
@@ -207,7 +207,7 @@ export default function DesignSystem() {
               <Badge variant="secondary">Secondary</Badge>
               <Badge variant="destructive">Destructive</Badge>
               <Badge variant="outline">Outline</Badge>
-              <Badge className="bg-gradient-to-r from-primary to-primary/80">
+              <Badge className="bg-linear-to-r from-primary to-primary/80">
                 Gradient
               </Badge>
             </div>
@@ -317,13 +317,13 @@ export default function DesignSystem() {
             </CardHeader>
             <CardContent>
               <div className="space-y-2">
-                <div className="h-12 w-full bg-gradient-to-r from-primary to-primary/50 rounded border flex items-center justify-center text-primary-foreground text-sm font-medium">
+                <div className="h-12 w-full bg-linear-to-r from-primary to-primary/50 rounded border flex items-center justify-center text-primary-foreground text-sm font-medium">
                   Primary Gradient
                 </div>
-                <div className="h-12 w-full bg-gradient-to-br from-primary/10 via-primary/20 to-primary/10 rounded border flex items-center justify-center text-foreground text-sm font-medium">
+                <div className="h-12 w-full bg-linear-to-br from-primary/10 via-primary/20 to-primary/10 rounded border flex items-center justify-center text-foreground text-sm font-medium">
                   Subtle Gradient
                 </div>
-                <div className="h-12 w-full bg-gradient-to-r from-secondary via-accent to-primary rounded border flex items-center justify-center text-primary-foreground text-sm font-medium">
+                <div className="h-12 w-full bg-linear-to-r from-secondary via-accent to-primary rounded border flex items-center justify-center text-primary-foreground text-sm font-medium">
                   Multi-color
                 </div>
               </div>
