@@ -35,14 +35,14 @@ export default function DesignSystem() {
   return (
     <div className="p-6 space-y-8 max-w-6xl mx-auto">
       <div className="space-y-2">
-        <h1 className="text-3xl font-bold">Design System</h1>
+        <h1 className="text-3xl font-bold">{t('pages.designSystem.title')}</h1>
         <p className="text-muted-foreground">
-          Showcase of all available UI components with different variants and states.
+          {t('pages.designSystem.description')}
         </p>
         <div className="flex items-center gap-2 p-3 bg-primary/10 border border-primary/20 rounded-lg">
           <Palette className="h-4 w-4 text-primary" />
           <p className="text-sm">
-            <strong>Astuce :</strong> Cliquez sur le bouton "cosmic-night" dans la barre de titre pour personnaliser ce thème avec{' '}
+            <strong>{t('pages.designSystem.themeCustomizationTip')}</strong>{' '}
             <a 
               href="https://tweakcn.com/editor/theme" 
               target="_blank" 
@@ -57,20 +57,20 @@ export default function DesignSystem() {
 
       {/* Buttons */}
       <section className="space-y-4">
-        <h2 className="text-2xl font-semibold">Buttons</h2>
+        <h2 className="text-2xl font-semibold">{t('pages.designSystem.sections.buttons')}</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           <Card>
             <CardHeader>
-              <CardTitle className="text-lg">Button Variants</CardTitle>
+              <CardTitle className="text-lg">{t('pages.designSystem.sections.buttonVariants')}</CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="flex flex-wrap gap-2">
-                <Button variant="default">Default</Button>
-                <Button variant="destructive">Destructive</Button>
-                <Button variant="outline">Outline</Button>
-                <Button variant="secondary">Secondary</Button>
-                <Button variant="ghost">Ghost</Button>
-                <Button variant="link">Link</Button>
+                <Button variant="default">{t('pages.designSystem.buttons.default')}</Button>
+                <Button variant="destructive">{t('pages.designSystem.buttons.destructive')}</Button>
+                <Button variant="outline">{t('pages.designSystem.buttons.outline')}</Button>
+                <Button variant="secondary">{t('pages.designSystem.buttons.secondary')}</Button>
+                <Button variant="ghost">{t('pages.designSystem.buttons.ghost')}</Button>
+                <Button variant="link">{t('pages.designSystem.buttons.link')}</Button>
               </div>
             </CardContent>
           </Card>

@@ -29,37 +29,43 @@ export function Layout({ children }: LayoutProps) {
 
   const navigation = [
     {
-      name: 'Dashboard',
+      name: t('nav.dashboard'),
       href: '/',
       icon: Home,
       badge: null,
     },
     {
-      name: 'Design System',
+      name: t('nav.designSystem'),
       href: '/design-system',
       icon: Palette,
       badge: 'New',
     },
     {
-      name: 'Analytics',
-      href: '/analytics',
-      icon: BarChart3,
-      badge: 'New',
+      name: t('nav.apiDemo'),
+      href: '/api-demo',
+      icon: Zap,
+      badge: 'Demo',
     },
     {
-      name: 'Team',
+      name: t('nav.analytics'),
+      href: '/analytics',
+      icon: BarChart3,
+      badge: 'Soon',
+    },
+    {
+      name: t('nav.team'),
       href: '/team',
       icon: Users,
       badge: null,
     },
     {
-      name: 'Calendar',
+      name: t('nav.calendar'),
       href: '/calendar',
       icon: Calendar,
       badge: '3',
     },
     {
-      name: 'Documents',
+      name: t('nav.documents'),
       href: '/documents',
       icon: FileText,
       badge: null,
