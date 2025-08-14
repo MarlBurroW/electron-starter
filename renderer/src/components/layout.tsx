@@ -95,8 +95,8 @@ export function Layout({ children }: LayoutProps) {
             size="sm" 
             className="h-6 px-2 text-xs text-muted-foreground hover:text-foreground hover:bg-accent/50 transition-colors cursor-pointer"
             onClick={() => {
-              if (window.electron?.shell) {
-                window.electron.shell.openExternal('https://tweakcn.com/editor/theme')
+              if (window.api?.openExternal) {
+                window.api.openExternal('https://tweakcn.com/editor/theme')
               } else {
                 window.open('https://tweakcn.com/editor/theme', '_blank')
               }
