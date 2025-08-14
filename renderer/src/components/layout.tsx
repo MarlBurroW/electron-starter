@@ -15,8 +15,8 @@ import {
 
 import { ThemeModeToggleSidebar } from '@/components/theme-mode-toggle-sidebar'
 import { LanguageToggle } from '@/components/language-toggle'
-import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
+import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
 
 interface LayoutProps {
@@ -33,6 +33,12 @@ export function Layout({ children }: LayoutProps) {
       href: '/',
       icon: Home,
       badge: null,
+    },
+    {
+      name: 'Design System',
+      href: '/design-system',
+      icon: Palette,
+      badge: 'New',
     },
     {
       name: 'Analytics',

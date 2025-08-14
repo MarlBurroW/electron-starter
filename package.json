@@ -19,12 +19,12 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/nicolasvarrot/electron-starter.git"
+    "url": "https://github.com/MarlBurroW/electron-starter.git"
   },
   "bugs": {
-    "url": "https://github.com/nicolasvarrot/electron-starter/issues"
+    "url": "https://github.com/MarlBurroW/electron-starter/issues"
   },
-  "homepage": "https://github.com/nicolasvarrot/electron-starter#readme",
+  "homepage": "https://github.com/MarlBurroW/electron-starter#readme",
   "scripts": {
     "dev": "concurrently \"npm run dev:vite\" \"npm run dev:electron\"",
     "dev:vite": "vite",

@@ -1,6 +1,7 @@
 import { Routes, Route } from 'react-router-dom'
 import { Layout } from '@/components/layout'
 import { Home } from '@/pages/Home'
+import DesignSystem from '@/pages/DesignSystem'
 import { Settings } from '@/pages/Settings'
 import { About } from '@/pages/About'
 
@@ -10,6 +11,7 @@ function App() {
     <Layout>
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/design-system" element={<DesignSystem />} />
         <Route path="/settings" element={<Settings />} />
         <Route path="/about" element={<About />} />
       </Routes>
