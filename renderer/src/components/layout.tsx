@@ -90,9 +90,21 @@ export function Layout({ children }: LayoutProps) {
           <span className="text-sm font-medium text-foreground/80">Electron Starter</span>
         </div>
         <div className="flex items-center space-x-2 no-drag">
-          <Button variant="ghost" size="sm" className="h-6 px-2 text-xs text-muted-foreground">
+          <Button 
+            variant="ghost" 
+            size="sm" 
+            className="h-6 px-2 text-xs text-muted-foreground hover:text-foreground hover:bg-accent/50 transition-colors cursor-pointer"
+            onClick={() => {
+              if (window.electron?.shell) {
+                window.electron.shell.openExternal('https://tweakcn.com/editor/theme')
+              } else {
+                window.open('https://tweakcn.com/editor/theme', '_blank')
+              }
+            }}
+            title="Personnaliser ce thème avec TweakCN"
+          >
             <Palette className="mr-1 h-3 w-3" />
-            bold-tech
+            cosmic-night
           </Button>
         </div>
       </div>
