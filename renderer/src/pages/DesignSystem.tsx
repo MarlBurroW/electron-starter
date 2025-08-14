@@ -11,6 +11,7 @@ import {
   Heart,
   Mail,
   MessageSquare,
+  Palette,
   Plus,
   Settings,
   Star,
@@ -38,6 +39,20 @@ export default function DesignSystem() {
         <p className="text-muted-foreground">
           Showcase of all available UI components with different variants and states.
         </p>
+        <div className="flex items-center gap-2 p-3 bg-primary/10 border border-primary/20 rounded-lg">
+          <Palette className="h-4 w-4 text-primary" />
+          <p className="text-sm">
+            <strong>Astuce :</strong> Cliquez sur le bouton "cosmic-night" dans la barre de titre pour personnaliser ce thème avec{' '}
+            <a 
+              href="https://tweakcn.com/editor/theme" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="text-primary hover:underline"
+            >
+              TweakCN
+            </a>
+          </p>
+        </div>
       </div>
 
       {/* Buttons */}
