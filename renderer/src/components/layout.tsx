@@ -10,7 +10,8 @@ import {
   Calendar,
   FileText,
   Zap,
-  Palette
+  Palette,
+  FileCheck
 } from 'lucide-react'
 
 import { ThemeModeToggleSidebar } from '@/components/theme-mode-toggle-sidebar'
@@ -41,35 +42,18 @@ export function Layout({ children }: LayoutProps) {
       badge: 'New',
     },
     {
+      name: t('nav.formDemo'),
+      href: '/form-demo',
+      icon: FileCheck,
+      badge: 'Cool',
+    },
+    {
       name: t('nav.apiDemo'),
       href: '/api-demo',
       icon: Zap,
       badge: 'Demo',
     },
-    {
-      name: t('nav.analytics'),
-      href: '/analytics',
-      icon: BarChart3,
-      badge: 'Soon',
-    },
-    {
-      name: t('nav.team'),
-      href: '/team',
-      icon: Users,
-      badge: null,
-    },
-    {
-      name: t('nav.calendar'),
-      href: '/calendar',
-      icon: Calendar,
-      badge: '3',
-    },
-    {
-      name: t('nav.documents'),
-      href: '/documents',
-      icon: FileText,
-      badge: null,
-    },
+ 
   ]
 
   const bottomNavigation = [
@@ -205,7 +189,7 @@ export function Layout({ children }: LayoutProps) {
         {/* Main content */}
         <div className="flex-1 flex flex-col overflow-hidden">
           {/* Main content area */}
-          <main className="flex-1 overflow-auto p-6">
+          <main className="flex-1 overflow-y-auto overflow-x-hidden">
             {children}
           </main>
         </div>

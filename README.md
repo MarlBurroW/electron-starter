@@ -49,6 +49,8 @@ A modern, production-ready Electron starter template with React, TypeScript, Tai
 - **Hot Module Replacement** with Vite for instant updates
 - **API Demo page** showcasing best practices
 - **Design System showcase** with all UI components
+- **Advanced Form Demo** with React Hook Form + Zod validation
+- **Enhanced Date Picker** with year/month quick selection
 - **Comprehensive logging** for debugging API calls
 - **ESLint + Prettier** for consistent code quality
 - **Husky git hooks** for automated quality checks
@@ -101,6 +103,7 @@ electron-starter/
 │   │   ├── pages/         # Application pages
 │   │   │   ├── Home.tsx   # Dashboard with fake data
 │   │   │   ├── ApiDemo.tsx # API best practices demo
+│   │   │   ├── FormDemo.tsx # Advanced form with validation
 │   │   │   ├── DesignSystem.tsx # UI showcase
 │   │   │   ├── Settings.tsx # App settings
 │   │   │   └── About.tsx  # System information
@@ -166,6 +169,39 @@ window.api.api.put<T>(url, body?, headers?)
 window.api.api.patch<T>(url, body?, headers?)
 window.api.api.delete<T>(url, headers?)
 ```
+
+## 📝 Advanced Form Features
+
+### Professional Form Validation
+The FormDemo page showcases production-ready form handling:
+
+```typescript
+// React Hook Form + Zod schema validation
+const formSchema = z.object({
+  firstName: z.string().min(2).regex(/^[a-zA-ZÀ-ÿ\s'-]+$/),
+  email: z.string().email(),
+  birthDate: z.date().refine(date => {
+    const age = new Date().getFullYear() - date.getFullYear()
+    return age >= 13 && age <= 120
+  }, 'Age must be between 13 and 120'),
+  // ... more validations
+})
+```
+
+### Enhanced Date Picker
+Smart birth date selection with improved UX:
+- **Quick Year Selection**: Dropdown with years 1900-present
+- **Month Navigation**: Direct month selection in French
+- **Fixed Height**: No more jumping calendar layouts
+- **3-Click Selection**: Year → Month → Day (vs 444+ clicks before!)
+
+### Form Best Practices
+- ✅ **Real-time validation** with immediate feedback
+- ✅ **Error-only styling** - no green success states (cleaner UX)
+- ✅ **Accessibility compliant** with proper labels and ARIA
+- ✅ **TypeScript integration** with full type safety
+- ✅ **International validation** (French phone numbers, postal codes)
+- ✅ **Multi-section layout** with progress indication
 
 ## 📜 Available Scripts
 

@@ -463,7 +463,66 @@
   * {
     @apply border-border outline-ring/50;
   }
+  html, body {
+    height: 100%;
+    overflow: hidden;
+  }
   body {
     @apply bg-background text-foreground;
+    /* Désactiver la sélection de texte par défaut (comme les apps natives) */
+    user-select: none;
+    -webkit-user-select: none;
+  }
+  #root {
+    height: 100%;
+  }
+}
+
+/* Réactiver la sélection pour les champs de saisie et le contenu */
+input, textarea, [contenteditable] {
+  user-select: text !important;
+  -webkit-user-select: text !important;
+}
+
+/* Scrollbar personnalisée aux couleurs du thème */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: hsl(var(--border)) hsl(var(--background));
+}
+
+*::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+*::-webkit-scrollbar-track {
+  background: hsl(var(--muted) / 0.2);
+  border-radius: 4px;
+}
+
+*::-webkit-scrollbar-thumb {
+  background: hsl(var(--border));
+  border-radius: 4px;
+  transition: background-color 0.2s ease;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--muted-foreground) / 0.8);
+}
+
+*::-webkit-scrollbar-corner {
+  background: hsl(var(--background));
+}
+
+/* Classes utilitaires pour contrôler la sélection de texte */
+@layer utilities {
+  .select-text {
+    user-select: text !important;
+    -webkit-user-select: text !important;
+  }
+  
+  .select-none {
+    user-select: none !important;
+    -webkit-user-select: none !important;
   }
 }
